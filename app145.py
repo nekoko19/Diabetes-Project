@@ -89,9 +89,9 @@ if (selected == 'Nutrition Regime'):
     st.title('Automatic Diet Recommendation')
     st.subheader('Modify the values and click the Generate button to use')
 
-    age = st.number_input("Age", min_value=18, max_value=100)
-    height_cm = st.number_input("Height (cm)", min_value=150, max_value=220)
-    weight_kg = st.number_input("Weight (kg)", min_value=35, max_value=150)
+    age = st.number_input("Age", min_value=0, max_value=100)
+    height_cm = st.number_input("Height (cm)", min_value=0, max_value=220)
+    weight_kg = st.number_input("Weight (kg)", min_value=0, max_value=150)
     gender = st.radio("Gender", ("Male", "Female"))
     activity_level = st.selectbox("Activity Level", ("Light exercise", "Little/no exercise", "Extra active (very active & physical job)"))
     weight_loss_plan = st.selectbox("Choose your weight loss plan", ("Maintain weight", "Lose weight", "Gain weight"))
