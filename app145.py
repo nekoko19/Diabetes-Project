@@ -38,7 +38,7 @@ with st.sidebar:
     st.sidebar.image(logo_image)  # Adjust width as needed
 
 # loading the saved models
-diabetes_model = pickle.load(open('./diabetes_model.sav', 'rb'))
+diabetes_model = pickle.load(open('./model.sav', 'rb'))
 
 # sidebar for navigation
 with st.sidebar:
@@ -110,6 +110,7 @@ if selected == 'Diabetes Prediction':
         
         except ValueError:
             st.error("Please enter valid numeric values for all inputs.")
+            
 # # Diabetes Prediction Page
 # if selected == 'Diabetes Prediction':
 #     st.title('Diabetes Prediction using ML')
