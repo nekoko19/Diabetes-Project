@@ -6,10 +6,6 @@ from streamlit_option_menu import option_menu
 from sklearn.neighbors import NearestNeighbors
 import streamlit.components.v1 as components
 
-# URL should be the direct link to the chat interface if supported by Chatbot.com
-chatbot_url = "https://app.chatbot.com/dashboard/664a37f4e8e694000770eaec"
-st.components.v1.iframe(chatbot_url, width=700, height=500)
-
 # GTM snippet for the <head> section
 GTM_HEAD = """
 <!-- Google Tag Manager -->
@@ -17,14 +13,14 @@ GTM_HEAD = """
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WQTKDTSH');</script>
+})(window,document,'script','dataLayer','GTM-XXXX');</script>
 <!-- End Google Tag Manager -->
 """
 
 # GTM snippet for the <body> section
 GTM_BODY = """
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQTKDTSH"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 """
@@ -32,6 +28,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 # Inject GTM code into the app
 st.markdown(GTM_HEAD, unsafe_allow_html=True)
 components.html(GTM_BODY, height=0, width=0)
+
+# Your Streamlit app code goes here
+st.title("My Streamlit App with Google Tag Manager")
+st.write("This is an example of how to add Google Tag Manager to a Streamlit app.")
 
 
 # Logo image path (replace with your image filename)
