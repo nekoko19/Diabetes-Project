@@ -19,7 +19,6 @@ diabetes_model = pickle.load(open('./diabetes_model.sav', 'rb'))
 with st.sidebar:
     selected = option_menu('Menu', ['Diabetes Prediction', 'Nutrition Regime', 'Others'],
                            icons=['activity', 'heart', 'person'], default_index=0)
-
 # Diabetes Prediction Page
 if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction using ML')
@@ -33,56 +32,122 @@ if selected == 'Diabetes Prediction':
     with col3:
         BloodPressure = st.text_input('Blood Pressure value', key="bp")
     with col1:
-        SkinThickness = st.text_input('Skin Thickness value')
-    with col2:
         Insulin = st.text_input('Insulin Level', key="insulin")
-    with col3:
-        BMI = st.text_input('BMI value')
-    with col1:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
     with col2:
+        BMI = st.text_input('BMI value')
+    with col3:
         Age = st.text_input('Age of the Person')
     
     if st.button('Diabetes Test Result'):
-        # Predicting diabetes
-        diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-        diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
-        st.success(diab_diagnosis)
+        try:
+            # Convert string input to numeric for prediction
+            Pregnancies = int(Pregnancies)
+            Glucose = float(Glucose)
+            BloodPressure = float(BloodPressure)
+            Insulin = float(Insulin)
+            BMI = float(BMI)
+            Age = int(Age)
 
-        # Convert string input to integer for analysis
-        bp = int(BloodPressure)
-        glucose_level = int(Glucose)
-        insulin_level = int(Insulin)
-        
-        # Blood pressure analysis
-        if bp >= 90 and bp < 130:
-            st.info(f"Your blood pressure is normal: {bp} mmHg.")
-        elif bp >= 130 and bp <= 139:
-            st.warning(f"You are at high risk of prehypertension with blood pressure: {bp} mmHg. It can lead to serious health issues.")
-        elif bp >= 140 and bp <= 179:
-            st.warning(f"With your blood pressure: {bp} mmHg, you have been diagnosed with level 1 hypertension.")
-        elif bp >= 180:
-            st.error(f"Your blood pressure is {bp} mmHg, indicating level 2 hypertension.")
-        else:
-            st.info(f"Your blood pressure is {bp} mmHg, indicating low blood pressure (hypotension).")
-        
-        # Glucose analysis
-        if glucose_level <= 70:
-            st.error("This is a very low and dangerous glucose level.")
-        elif glucose_level > 70 and glucose_level <= 100:
-            st.info("This is a normal glucose level.")
-        elif glucose_level > 100 and glucose_level <= 126:
-            st.warning("You tend to have prediabetes.")
-        else:
-            st.error("Your glucose is in highly alarming level.")
+            # Predicting diabetes
+            diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, Insulin, BMI, Age]])
+            diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
+            st.success(diab_diagnosis)
 
-        # Insulin analysis
-        if insulin_level < 16:
-            st.warning("This is a low level of Insulin.")
-        elif insulin_level >= 16 and insulin_level <= 166:
-            st.info("This is a normal level of Insulin.")
-        else:
-            st.warning("Your insulin too high, you may be related to diabetes, metabolic syndrome, or insulin resistance.")
+            # Blood pressure analysis
+            if BloodPressure >= 90 and BloodPressure < 130:
+                st.info(f"Your blood pressure is normal: {BloodPressure} mmHg.")
+            elif BloodPressure >= 130 and BloodPressure <= 139:
+                st.warning(f"You are at high risk of prehypertension with blood pressure: {BloodPressure} mmHg. It can lead to serious health issues.")
+            elif BloodPressure >= 140 and BloodPressure <= 179:
+                st.warning(f"With your blood pressure: {BloodPressure} mmHg, you have been diagnosed with level 1 hypertension.")
+            elif BloodPressure >= 180:
+                st.error(f"Your blood pressure is {BloodPressure} mmHg, indicating level 2 hypertension.")
+            else:
+                st.info(f"Your blood pressure is {BloodPressure} mmHg, indicating low blood pressure (hypotension).")
+            
+            # Glucose analysis
+            if Glucose <= 70:
+                st.error("This is a very low and dangerous glucose level.")
+            elif Glucose > 70 and Glucose <= 100:
+                st.info("This is a normal glucose level.")
+            elif Glucose > 100 and Glucose <= 126:
+                st.warning("You tend to have prediabetes.")
+            else:
+                st.error("Your glucose is in highly alarming level.")
+
+            # Insulin analysis
+            if Insulin < 16:
+                st.warning("This is a low level of Insulin.")
+            elif Insulin >= 16 and Insulin <= 166:
+                st.info("This is a normal level of Insulin.")
+            else:
+                st.warning("Your insulin too high, you may be related to diabetes, metabolic syndrome, or insulin resistance.")
+        
+        except ValueError:
+            st.error("Please enter valid numeric values for all inputs.")
+# # Diabetes Prediction Page
+# if selected == 'Diabetes Prediction':
+#     st.title('Diabetes Prediction using ML')
+    
+#     col1, col2, col3 = st.columns(3)
+    
+#     with col1:
+#         Pregnancies = st.text_input('Number of Pregnancies')
+#     with col2:
+#         Glucose = st.text_input('Glucose Level', key="glucose")
+#     with col3:
+#         BloodPressure = st.text_input('Blood Pressure value', key="bp")
+#     with col1:
+#         SkinThickness = st.text_input('Skin Thickness value')
+#     with col2:
+#         Insulin = st.text_input('Insulin Level', key="insulin")
+#     with col3:
+#         BMI = st.text_input('BMI value')
+#     with col1:
+#         DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
+#     with col2:
+#         Age = st.text_input('Age of the Person')
+    
+#     if st.button('Diabetes Test Result'):
+#         # Predicting diabetes
+#         diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+#         diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
+#         st.success(diab_diagnosis)
+
+#         # Convert string input to integer for analysis
+#         bp = int(BloodPressure)
+#         glucose_level = int(Glucose)
+#         insulin_level = int(Insulin)
+        
+#         # Blood pressure analysis
+#         if bp >= 90 and bp < 130:
+#             st.info(f"Your blood pressure is normal: {bp} mmHg.")
+#         elif bp >= 130 and bp <= 139:
+#             st.warning(f"You are at high risk of prehypertension with blood pressure: {bp} mmHg. It can lead to serious health issues.")
+#         elif bp >= 140 and bp <= 179:
+#             st.warning(f"With your blood pressure: {bp} mmHg, you have been diagnosed with level 1 hypertension.")
+#         elif bp >= 180:
+#             st.error(f"Your blood pressure is {bp} mmHg, indicating level 2 hypertension.")
+#         else:
+#             st.info(f"Your blood pressure is {bp} mmHg, indicating low blood pressure (hypotension).")
+        
+#         # Glucose analysis
+#         if glucose_level <= 70:
+#             st.error("This is a very low and dangerous glucose level.")
+#         elif glucose_level > 70 and glucose_level <= 100:
+#             st.info("This is a normal glucose level.")
+#         elif glucose_level > 100 and glucose_level <= 126:
+#             st.warning("You tend to have prediabetes.")
+#         else:
+#             st.error("Your glucose is in highly alarming level.")
+
+#         # Insulin analysis
+#         if insulin_level < 16:
+#             st.warning("This is a low level of Insulin.")
+#         elif insulin_level >= 16 and insulin_level <= 166:
+#             st.info("This is a normal level of Insulin.")
+#         else:
+#             st.warning("Your insulin too high, you may be related to diabetes, metabolic syndrome, or insulin resistance.")
 
 # Nutrition Recommendation Page
 if (selected == 'Nutrition Regime'):
