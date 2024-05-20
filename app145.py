@@ -29,10 +29,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 st.markdown(GTM_HEAD, unsafe_allow_html=True)
 components.html(GTM_BODY, height=0, width=0)
 
-# Your Streamlit app code goes here
-st.title("My Streamlit App with Google Tag Manager")
-st.write("This is an example of how to add Google Tag Manager to a Streamlit app.")
-
 
 # Logo image path (replace with your image filename)
 logo_image = "logo.png"
