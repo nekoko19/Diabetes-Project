@@ -4,6 +4,31 @@ import pandas as pd
 import numpy as np
 from streamlit_option_menu import option_menu
 from sklearn.neighbors import NearestNeighbors
+import streamlit.components.v1 as components
+
+# GTM snippet for the <head> section
+GTM_HEAD = """
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WQTKDTSH');</script>
+<!-- End Google Tag Manager -->
+"""
+
+# GTM snippet for the <body> section
+GTM_BODY = """
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQTKDTSH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+"""
+
+# Inject GTM code into the app
+st.markdown(GTM_HEAD, unsafe_allow_html=True)
+components.html(GTM_BODY, height=0, width=0)
+
 
 # Logo image path (replace with your image filename)
 logo_image = "logo.png"
