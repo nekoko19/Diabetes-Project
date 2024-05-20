@@ -6,6 +6,10 @@ from streamlit_option_menu import option_menu
 from sklearn.neighbors import NearestNeighbors
 import streamlit.components.v1 as components
 
+# URL should be the direct link to the chat interface if supported by Chatbot.com
+chatbot_url = "https://app.chatbot.com/dashboard/664a37f4e8e694000770eaec"
+st.components.v1.iframe(chatbot_url, width=700, height=500)
+
 # GTM snippet for the <head> section
 GTM_HEAD = """
 <!-- Google Tag Manager -->
